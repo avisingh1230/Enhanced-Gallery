@@ -1,31 +1,37 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, Dimensions, View } from 'react-native';
-import { SavedImage } from '../types';
+import { FlatList, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { SavedImage } from '../types/index';
 
 const { width } = Dimensions.get('window');
-const COLUMN_COUNT = 3;
+const gap = 2;
+const itemSize = (width - gap * 4) / 3;
 
-export const ImageGrid = ({ images }: { images: SavedImage[] }) => {
+interface Props {
+  images: SavedImage[];
+  onPressImage: (selectedImage: SavedImage) => void; // Added prop
+}
+
+export const ImageGrid = ({ images, onPressImage }: Props) => {
   return (
     <FlatList
       data={images}
       keyExtractor={(item) => item.id.toString()}
-      numColumns={COLUMN_COUNT}
+      numColumns={3}
       renderItem={({ item }) => (
-        <Image source={{ uri: item.local_uri }} style={styles.image} />
+        <TouchableOpacity onPress={() => onPressImage(item)}>
+          <Image source={{ uri: item.local_uri }} style={styles.image} />
+        </TouchableOpacity>
       )}
-      contentContainerStyle={styles.container}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 2 },
   image: {
-    width: width / COLUMN_COUNT - 4,
-    height: width / COLUMN_COUNT - 4,
-    margin: 2,
-    borderRadius: 8,
-    backgroundColor: '#eee',
+    width: itemSize,
+    height: itemSize,
+    margin: gap,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 4,
   },
 });

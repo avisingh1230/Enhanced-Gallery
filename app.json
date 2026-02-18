@@ -2,6 +2,24 @@
   "expo": {
     "name": "my-app",
     "slug": "my-app",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "orientation": "portrait",
+
+    "scheme": "myApp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router"    
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }
