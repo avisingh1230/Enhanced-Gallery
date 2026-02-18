@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { File } from 'expo-file-system';
-
-const genAI = new GoogleGenAI({ apiKey:"AIzaSyCOZCwFvRNo6T31eL_PUXz9k4DtIGf2FsM"});
+const GEMINI_API_KEY= process.env.EXPO_PUBLIC_GEMINI_API_KEY;
+const genAI = new GoogleGenAI({ apiKey:GEMINI_API_KEY});
 
 export const describeImage = async (imageUri: string): Promise<string> => {
   try {
